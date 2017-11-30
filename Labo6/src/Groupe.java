@@ -5,20 +5,15 @@ public class Groupe {
    private int no;
 
 
-   private LinkedList<Etudiant> etudiants;
+   private LinkedList<Etudiant> etudiants = new LinkedList<>();
    
    
-   public Groupe(int no, LinkedList<Etudiant> etudiants) {
+   public Groupe(int no, Etudiant... etudiants) {
       this.no = no;
       for (Etudiant etudiant : etudiants){
          this.etudiants.add(etudiant);
          etudiant.setGroupe(this);
       }
-   }
-
-
-   public Groupe(int no) {
-      this(no, new LinkedList<Etudiant>());
    }
 
 
