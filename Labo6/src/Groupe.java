@@ -60,24 +60,35 @@ public class Groupe {
 
    public static void transfererEtudiants(Groupe groupeA, Groupe groupeB, Etudiant... etudiants) {
       // TODO implement here
-      return null;
    }
 
 
    public void transfererTous(Groupe groupe) {
-      // TODO implement here
-      return null;
+      for (Etudiant etudiant : etudiants) {
+         etudiant.setGroupe(groupe);
+         groupe.ajouterEtudiants(etudiant);
+      }
    }
 
 
    public static void transfererTous(Groupe groupeA, Groupe groupeB) {
-      // TODO implement here
-      return null;
+      for (Etudiant etudiant : groupeA.etudiants) {
+         etudiant.setGroupe(groupeB);
+         groupeB.ajouterEtudiants(etudiant);
+      }
    }
    
    public String toString() {
-      // TODO implement here
-      return "";
+      String s = "g" + no + " : [";
+      for (Etudiant etudiant : etudiants){
+
+         if(etudiant == etudiants.getLast())
+            s += etudiant + " ";
+         else
+            s += etudiant + ", ";
+      }
+      s += "]";
+      return s;
    }
 
 }
