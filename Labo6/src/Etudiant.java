@@ -17,7 +17,7 @@ public class Etudiant {
 
 
    public Etudiant(String nom) {
-      this(nom, new Groupe());
+      this(nom, null);
    }
 
 
