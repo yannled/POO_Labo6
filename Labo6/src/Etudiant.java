@@ -1,9 +1,5 @@
 public class Etudiant {
 
-
-   public Etudiant() {
-   }
-
    private String nom;
 
 
@@ -11,33 +7,40 @@ public class Etudiant {
 
    
 
-   public void Etudiant(String nom, Groupe groupe) {
-      // TODO implement here
+   public Etudiant(String nom, Groupe groupe) {
+      this.nom = nom;
+      this.groupe = groupe;
+      if (groupe != null){
+         groupe.ajouterEtudiants(this);
+      }
    }
 
 
-   public void Etudiant(String nom) {
-      // TODO implement here
+   public Etudiant(String nom) {
+      this(nom, new Groupe());
    }
 
 
    public String getNom() {
-      // TODO implement here
-      return "";
+      return nom;
    }
 
 
    public Groupe getGroupe() {
-      // TODO implement here
+      return groupe;
    }
 
 
    public void setGroupe(Groupe groupe) {
-      // TODO implement here
+      this.groupe = groupe;
+      groupe.ajouterEtudiants(this);
    }
 
-      public String toString() {
-      // TODO implement here
-      return "";
+   public String toString() {
+      String s = nom;
+      if(groupe != null){
+         s += "(g" + groupe.getNo() + ")";
+      }
+      return s;
    }
 }
