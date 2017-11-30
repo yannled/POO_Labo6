@@ -2,7 +2,7 @@ import java.util.LinkedList;
 
 public class Groupe {
 
-   private int no;
+   private final int no;
 
 
    private LinkedList<Etudiant> etudiants = new LinkedList<>();
