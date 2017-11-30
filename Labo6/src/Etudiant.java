@@ -17,7 +17,7 @@ public class Etudiant {
 
 
    public Etudiant(String nom) {
-      this(nom, new Groupe());
+      this(nom, null);
    }
 
 
@@ -33,7 +33,12 @@ public class Etudiant {
 
    public void setGroupe(Groupe groupe) {
       this.groupe = groupe;
-      groupe.ajouterEtudiants(this);
+      if (getGroupe() == null){
+         groupe.ajouterEtudiants(this);
+      } 
+      else {
+         getGroupe().transfererEtudiants(groupe, this);
+      }
    }
 
    public String toString() {
