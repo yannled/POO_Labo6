@@ -9,11 +9,11 @@ public class Groupe {
    
    
    public Groupe(int no, Etudiant... etudiants) {
+      //TODO: utiliser ajouterEtudiant dans le constructeur ce qui settera automatiquement le groupe
       this.no = no;
-      for (Etudiant etudiant : etudiants){
-         this.etudiants.add(etudiant);
-         etudiant.setGroupe(this);
-      }
+
+      if (etudiants.length > 0)
+      this.ajouterEtudiants(etudiants);
    }
 
 
@@ -28,14 +28,26 @@ public class Groupe {
 
 
    public void ajouterEtudiants(Etudiant... etudiants) {
+
+      for (Etudiant etudiant : etudiants){
+
+         this.etudiants.add(etudiant);
+
+         if(etudiant.getGroupe() != null){
+            etudiant.getGroupe().supprimerEtudiants(etudiant);
+         }
+
+      }
+      /*
       for (Etudiant etudiant : etudiants){
          this.etudiants.add(etudiant);
          etudiant.setGroupe(this);
-      }
+      }*/
    }
 
 
    public void supprimerEtudiants(Etudiant... etudiants) {
+
       for (Etudiant etudiant : etudiants){
          this.etudiants.remove(etudiant);
          etudiant.setGroupe(null);
@@ -45,31 +57,28 @@ public class Groupe {
 
    public void viderGroupe() {
       etudiants.clear();
+      //TODO: voir si besoin enlever leur groupe
    }
 
    public void transfererEtudiants(Groupe groupe, Etudiant... etudiants) {
-      groupe.ajouterEtudiants(etudiants);
-      supprimerEtudiants(etudiants);
+      transfererEtudiants(this, groupe, etudiants);
    }
 
 
    public static void transfererEtudiants(Groupe groupeA, Groupe groupeB, Etudiant... etudiants) {
-      // TODO implement here
+      groupeB.ajouterEtudiants(etudiants);
+      groupeA.supprimerEtudiants(etudiants);
    }
 
 
    public void transfererTous(Groupe groupe) {
-      for (Etudiant etudiant : etudiants) {
-         etudiant.setGroupe(groupe);
-         groupe.ajouterEtudiants(etudiant);
-      }
+      transfererEtudiants(this, groupe);
    }
 
 
    public static void transfererTous(Groupe groupeA, Groupe groupeB) {
       for (Etudiant etudiant : groupeA.etudiants) {
-         etudiant.setGroupe(groupeB);
-         groupeB.ajouterEtudiants(etudiant);
+         transfererEtudiants(groupeA,groupeB,etudiant);
       }
    }
    

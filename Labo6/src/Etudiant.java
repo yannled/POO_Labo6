@@ -32,13 +32,26 @@ public class Etudiant {
 
 
    public void setGroupe(Groupe groupe) {
+
+      //si possédait déjà un groupe on le supprime du groupe
+      if(getGroupe() != null){
+         groupe.supprimerEtudiants(this);
+      }
+
+      // on lui attribue le nouveau groupe.
+      this.groupe = groupe;
+
+      // on l'ajoute au nouveau groupe.
+      groupe.ajouterEtudiants(this);
+
+      /*
       this.groupe = groupe;
       if (getGroupe() == null){
          groupe.ajouterEtudiants(this);
       } 
       else {
          getGroupe().transfererEtudiants(groupe, this);
-      }
+      }*/
    }
 
    public String toString() {
