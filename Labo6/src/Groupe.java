@@ -32,6 +32,7 @@ public class Groupe {
       for (Etudiant etudiant : etudiants){
          //AddInGroup(etudiant);
          //this.etudiants.add(etudiant);
+
          etudiant.setGroupe(this);
       }
    }

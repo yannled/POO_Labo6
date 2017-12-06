@@ -18,6 +18,7 @@ public class Main {
       Etudiant e2 = new Etudiant("max",g1);
 
       System.out.println(e2.getGroupe());
+      
       System.out.println(e2.getNom());
       System.out.println(g1.getEtudiants());
       System.out.println(g1.getNo());

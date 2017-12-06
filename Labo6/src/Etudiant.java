@@ -36,6 +36,7 @@ public class Etudiant {
       // on lui attribue le nouveau groupe.
       Groupe.sychronisation(newGroupe, this);
       this.groupe = newGroupe;
+
    }
 
    public String toString() {
