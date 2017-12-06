@@ -94,9 +94,10 @@ public class Groupe {
       String s = "g" + no + " : [";
       for (Etudiant etudiant : etudiants){
 
-         if(etudiant != etudiants.getLast()){
-             s += etudiant + ", ";
-         }
+         if(etudiant == etudiants.getLast())
+            s += etudiant;
+         else
+            s += etudiant + ", ";
       }
       s += "]";
       return s;
