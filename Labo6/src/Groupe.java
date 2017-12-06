@@ -1,21 +1,36 @@
+/*
+ -----------------------------------------------------------------------------------
+ Laboratoire : 06
+ Fichier     : Groupe.java
+ Auteur(s)   : Loic Frueh et Yann Lederrey
+ Date        : 28.11.2017
+
+ But         : Implémente la classe Groupe permettant de construire un objet de
+               type Groupe, d'obtenir son numéro, la liste des étudiants le 
+               composant, d'ajouter et/ou supprimer un, plusieurs ou tous les 
+               étudiants dans le groupe, et de transférer un, plusieurs ou tous
+               les étudiants du groupe vers un autre.
+
+ Remarque(s) : La classe Groupe fonctionne avec la classe Etudiant. De plus, ces
+               deux classes font partie du même paquetage.
+
+ Compilateur : jdk 1.8.0_144-b01
+ -----------------------------------------------------------------------------------
+ */
+
 import java.util.LinkedList;
 
 public class Groupe {
 
    private final int no;
-
-
    private LinkedList<Etudiant> etudiants = new LinkedList<>();
    
-   
    public Groupe(int no, Etudiant... etudiants) {
-      //TODO: utiliser ajouterEtudiant dans le constructeur ce qui settera automatiquement le groupe
       this.no = no;
-
+      
       if (etudiants.length > 0)
       this.ajouterEtudiants(etudiants);
    }
-
 
    public LinkedList<Etudiant> getEtudiants()
    {
@@ -27,32 +42,25 @@ public class Groupe {
       return copyEtudiants;
    }
 
-
    public int getNo() {
       return no;
    }
-
-
-   public void ajouterEtudiants(Etudiant... etudiants) {
+   /* ajouterEtudiants est déclaré final ici afin d'éviter qu'une méthode utilisée
+      lors de la construction d'un objet soit redéfinie.
+   */
+   public final void ajouterEtudiants(Etudiant... etudiants) {
 
       for (Etudiant etudiant : etudiants){
-         //AddInGroup(etudiant);
-         //this.etudiants.add(etudiant);
-
          etudiant.setGroupe(this);
       }
    }
 
-
    public void supprimerEtudiants(Etudiant... etudiants) {
 
       for (Etudiant etudiant : etudiants){
-         //suppInGroup(etudiant);
-         //this.etudiants.remove(etudiant);
          etudiant.setGroupe(null);
       }
    }
-
 
    public void viderGroupe() {
       while (!etudiants.isEmpty()){
@@ -64,37 +72,29 @@ public class Groupe {
       transfererEtudiants(this, groupe, etudiants);
    }
 
+   public static void transfererEtudiants(Groupe groupeSource, Groupe groupeDest, Etudiant... etudiants) {
+      if(groupeSource != null && groupeSource != groupeDest){
 
-   public static void transfererEtudiants(Groupe groupeA, Groupe groupeB, Etudiant... etudiants) {
-      if(groupeA == null){
-         return;
-      }
-      if(groupeA == groupeB){
-         return;
-      }
-      for (Etudiant etudiant : etudiants){
-         etudiant.setGroupe(groupeB);
+         for (Etudiant etudiant : etudiants){
+            etudiant.setGroupe(groupeDest);
+         }
       }
    }
-
 
    public void transfererTous(Groupe groupe) {
       transfererTous(this, groupe);
    }
 
+   public static void transfererTous(Groupe groupeSource, Groupe groupeDest) {
+      if(groupeSource != null && groupeSource != groupeDest){
 
-   public static void transfererTous(Groupe groupeA, Groupe groupeB) {
-      if(groupeA == null){
-         return;
-      }
-      if(groupeA == groupeB){
-         return;
-      }
-      while (!groupeA.etudiants.isEmpty()){
-         transfererEtudiants(groupeA,groupeB,groupeA.etudiants.getFirst());
+         while (!groupeSource.etudiants.isEmpty()){
+            transfererEtudiants(groupeSource, groupeDest, groupeSource.etudiants.getFirst());
+         }
       }
    }
    
+   @Override
    public String toString() {
       String s = "g" + no + " : [";
       for (Etudiant etudiant : etudiants){
@@ -108,24 +108,14 @@ public class Groupe {
       return s;
    }
 
-   protected static void sychronisation(Groupe newGroupe, Etudiant etudiant){
-      Groupe oldGroupe = etudiant.getGroupe();
-      if (oldGroupe != null){
-         //oldGroupe.suppInGroup(etudiant);
-         oldGroupe.etudiants.remove(etudiant);
+   protected static void sychroniser(Groupe nouveauGroupe, Etudiant etudiant){
+      Groupe ancienGroupe = etudiant.getGroupe();
+      
+      if (ancienGroupe != null){
+         ancienGroupe.etudiants.remove(etudiant);
       }
-      if(newGroupe != null){
-         //newGroupe.AddInGroup(etudiant);
-         newGroupe.etudiants.add(etudiant);
+      if(nouveauGroupe != null){
+         nouveauGroupe.etudiants.add(etudiant);
       }
    }
-
-   private void AddInGroup(Etudiant etudiant){
-      etudiants.add(etudiant);
-   }
-
-   private void suppInGroup(Etudiant etudiant){
-      etudiants.remove(etudiant);
-   }
-
 }
