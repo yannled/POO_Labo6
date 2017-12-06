@@ -17,8 +17,14 @@ public class Groupe {
    }
 
 
-   public LinkedList<Etudiant> getEtudiants() {
-      return etudiants;
+   public LinkedList<Etudiant> getEtudiants()
+   {
+      LinkedList<Etudiant> copyEtudiants = new LinkedList<>();
+      for (Etudiant etudiant : etudiants) {
+         Etudiant copyEtudiant = new Etudiant(etudiant.getNom(), etudiant.getGroupe());
+         copyEtudiants.add(copyEtudiant);
+      }
+      return copyEtudiants;
    }
 
 
@@ -60,8 +66,15 @@ public class Groupe {
 
 
    public static void transfererEtudiants(Groupe groupeA, Groupe groupeB, Etudiant... etudiants) {
-      groupeB.ajouterEtudiants(etudiants);
-      groupeA.supprimerEtudiants(etudiants);
+      if(groupeA == null){
+         return;
+      }
+      if(groupeA == groupeB){
+         return;
+      }
+      for (Etudiant etudiant : etudiants){
+         etudiant.setGroupe(groupeB);
+      }
    }
 
 
@@ -71,8 +84,14 @@ public class Groupe {
 
 
    public static void transfererTous(Groupe groupeA, Groupe groupeB) {
-      for (Etudiant etudiant : groupeA.etudiants) {
-         transfererEtudiants(groupeA,groupeB,etudiant);
+      if(groupeA == null){
+         return;
+      }
+      if(groupeA == groupeB){
+         return;
+      }
+      while (!groupeA.etudiants.isEmpty()){
+         transfererEtudiants(groupeA,groupeB,groupeA.etudiants.getFirst());
       }
    }
    

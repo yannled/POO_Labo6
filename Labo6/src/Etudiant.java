@@ -9,10 +9,7 @@ public class Etudiant {
 
    public Etudiant(String nom, Groupe groupe) {
       this.nom = nom;
-      this.groupe = groupe;
-      if (groupe != null){
-         groupe.ajouterEtudiants(this);
-      }
+      this.setGroupe(groupe);
    }
 
 
@@ -32,10 +29,9 @@ public class Etudiant {
 
 //SI param invalide fait rien.
    public void setGroupe(Groupe newGroupe) {
-
       // on lui attribue le nouveau groupe.
       Groupe.sychronisation(newGroupe, this);
-      this.groupe = newGroupe;
+      groupe = newGroupe;
 
    }
 

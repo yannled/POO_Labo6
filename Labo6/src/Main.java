@@ -18,7 +18,7 @@ public class Main {
       Etudiant e2 = new Etudiant("max",g1);
 
       System.out.println(e2.getGroupe());
-      
+
       System.out.println(e2.getNom());
       System.out.println(g1.getEtudiants());
       System.out.println(g1.getNo());
@@ -67,6 +67,41 @@ public class Main {
       g2.viderGroupe();
       System.out.println(g2);
       System.out.println(etuTest);
+
+      // TEST VIDER GROUPE
+      System.out.println("TEST tranfererTous");
+      Groupe g3 = new Groupe(3);
+      Etudiant e7 = new Etudiant("aline");
+      Etudiant e8 = new Etudiant("Oh OUIII");
+      Groupe g4 = new Groupe(4,e7,e8);
+
+      System.out.println(g4);
+      g4.transfererTous(g3);
+      System.out.println(g4);
+      System.out.println(g3);
+
+      System.out.println("TEST tranferer un certain nombre d'étudiants");
+      g3.transfererEtudiants(g4,e7);
+      System.out.println(g3);
+      System.out.println(g4);
+
+      System.out.println("TEST tranfererTous  a partir de vide");
+      Groupe.transfererTous(null,g4);
+      System.out.println(g4);
+
+      System.out.println("TEST tranfertous vers meme groupe");
+      Groupe.transfererTous(g4,g4);
+      System.out.println(g4);
+
+      System.out.println("TEST tranfererTous vers vide");
+
+      Etudiant tempEtudiant = g3.getEtudiants().getFirst();
+      Groupe.transfererTous(g3,null);
+      System.out.println(g3);
+      System.out.println(tempEtudiant);
+
+
+
 
    }
    // TODOLIST
