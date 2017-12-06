@@ -1,9 +1,19 @@
-/**
- * @author Yann Lederrey, Loic Frueh
- *
- * Description: Class de test pour les class Groupe et Etudiant.
- *
+/*
+ -----------------------------------------------------------------------------------
+ Laboratoire : 06
+ Fichier     : Etudiant.java
+ Auteur(s)   : Loic Frueh et Yann Lederrey
+ Date        : 28.11.2017
+
+ But         : Tester les méthodes des class Groupe et Etudiant
+
+ Remarque(s) : Certaine fonctions n'on pas besoin d'etre testées à plusieurs reprises
+               car elle sont réutilisées par d'autre fonctions.
+
+ Compilateur : jdk 1.8.0_144-b01
+ -----------------------------------------------------------------------------------
  */
+
 public class Main {
    public static void main (String[] args) {
 
