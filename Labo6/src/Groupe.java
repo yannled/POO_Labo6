@@ -34,12 +34,7 @@ public class Groupe {
 
    public LinkedList<Etudiant> getEtudiants()
    {
-      LinkedList<Etudiant> copyEtudiants = new LinkedList<>();
-      for (Etudiant etudiant : etudiants) {
-         Etudiant copyEtudiant = new Etudiant(etudiant.getNom(), etudiant.getGroupe());
-         copyEtudiants.add(copyEtudiant);
-      }
-      return copyEtudiants;
+      return etudiants;
    }
 
    public int getNo() {
@@ -99,10 +94,9 @@ public class Groupe {
       String s = "g" + no + " : [";
       for (Etudiant etudiant : etudiants){
 
-         if(etudiant == etudiants.getLast())
-            s += etudiant + " ";
-         else
-            s += etudiant + ", ";
+         if(etudiant != etudiants.getLast()){
+             s += etudiant + ", ";
+         }
       }
       s += "]";
       return s;
