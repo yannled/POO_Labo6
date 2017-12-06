@@ -30,25 +30,17 @@ public class Groupe {
    public void ajouterEtudiants(Etudiant... etudiants) {
 
       for (Etudiant etudiant : etudiants){
-
-         this.etudiants.add(etudiant);
-
-         if(etudiant.getGroupe() != null){
-            etudiant.getGroupe().supprimerEtudiants(etudiant);
-         }
-
-      }
-      /*
-      for (Etudiant etudiant : etudiants){
+         //AddInGroup(etudiant);
          this.etudiants.add(etudiant);
          etudiant.setGroupe(this);
-      }*/
+      }
    }
 
 
    public void supprimerEtudiants(Etudiant... etudiants) {
 
       for (Etudiant etudiant : etudiants){
+         //suppInGroup(etudiant);
          this.etudiants.remove(etudiant);
          etudiant.setGroupe(null);
       }
@@ -72,7 +64,7 @@ public class Groupe {
 
 
    public void transfererTous(Groupe groupe) {
-      transfererEtudiants(this, groupe);
+      transfererTous(this, groupe);
    }
 
 
@@ -93,6 +85,26 @@ public class Groupe {
       }
       s += "]";
       return s;
+   }
+
+   protected static void sychronisation(Groupe newGroupe, Etudiant etudiant){
+      Groupe oldGroupe = etudiant.getGroupe();
+      if (oldGroupe != null){
+         //oldGroupe.suppInGroup(etudiant);
+         oldGroupe.etudiants.remove(etudiant);
+      }
+      if(newGroupe != null){
+         //newGroupe.AddInGroup(etudiant);
+         newGroupe.etudiants.add(etudiant);
+      }
+   }
+
+   private void AddInGroup(Etudiant etudiant){
+      etudiants.add(etudiant);
+   }
+
+   private void suppInGroup(Etudiant etudiant){
+      etudiants.remove(etudiant);
    }
 
 }

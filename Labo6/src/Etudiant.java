@@ -30,28 +30,12 @@ public class Etudiant {
       return groupe;
    }
 
-
-   public void setGroupe(Groupe groupe) {
-
-      //si possédait déjà un groupe on le supprime du groupe
-      if(getGroupe() != null){
-         groupe.supprimerEtudiants(this);
-      }
+//SI param invalide fait rien.
+   public void setGroupe(Groupe newGroupe) {
 
       // on lui attribue le nouveau groupe.
-      this.groupe = groupe;
-
-      // on l'ajoute au nouveau groupe.
-      groupe.ajouterEtudiants(this);
-
-      /*
-      this.groupe = groupe;
-      if (getGroupe() == null){
-         groupe.ajouterEtudiants(this);
-      } 
-      else {
-         getGroupe().transfererEtudiants(groupe, this);
-      }*/
+      Groupe.sychronisation(newGroupe, this);
+      this.groupe = newGroupe;
    }
 
    public String toString() {
