@@ -31,7 +31,7 @@ public class Groupe {
 
       for (Etudiant etudiant : etudiants){
          //AddInGroup(etudiant);
-         this.etudiants.add(etudiant);
+         //this.etudiants.add(etudiant);
          etudiant.setGroupe(this);
       }
    }
@@ -41,15 +41,16 @@ public class Groupe {
 
       for (Etudiant etudiant : etudiants){
          //suppInGroup(etudiant);
-         this.etudiants.remove(etudiant);
+         //this.etudiants.remove(etudiant);
          etudiant.setGroupe(null);
       }
    }
 
 
    public void viderGroupe() {
-      etudiants.clear();
-      //TODO: voir si besoin enlever leur groupe
+      while (!etudiants.isEmpty()){
+         etudiants.getFirst().setGroupe(null);
+      }
    }
 
    public void transfererEtudiants(Groupe groupe, Etudiant... etudiants) {
